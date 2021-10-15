@@ -1,6 +1,5 @@
-import { TaskService } from '../../services';
+export default async (request) => {
+  const service = request.container('TaskService');
 
-export default async () => {
-  const service = new TaskService();
   return service.find({});
 };

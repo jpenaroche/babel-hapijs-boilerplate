@@ -1,8 +1,7 @@
 import * as Boom from '@hapi/boom';
-import { TaskService } from '../../services';
 
 export default async (request, h) => {
-  const service = new TaskService();
+  const service = request.container('TaskService');
   const id = request.params.id;
   let task = request.payload.task;
   const result = await service.updateOneById(id, task);

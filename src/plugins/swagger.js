@@ -14,6 +14,14 @@ export default (server) =>
           title: 'API Documentation',
           version,
         },
+        securityDefinitions: {
+          jwt: {
+            type: 'apiKey',
+            name: 'Authorization',
+            in: 'header',
+          },
+        },
+        security: [{ jwt: [] }],
       },
     },
   ]);

@@ -24,10 +24,10 @@ export const init = async (plugins = []) => {
   return server;
 };
 
-export const run = async (ctx) => {
+export const run = async ({ container }) => {
   const server = await init(plugins);
 
-  server.decorate('server', 'ctx', () => ctx);
+  server.decorate('request', 'container', (name) => container.get(name));
 
   await server.start();
 };

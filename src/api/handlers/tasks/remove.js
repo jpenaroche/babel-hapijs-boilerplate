@@ -1,8 +1,5 @@
-import * as Boom from '@hapi/boom';
-import { TaskService } from '../../services';
-
 export default async (request) => {
-  const service = new TaskService();
+  const service = request.container('TaskService');
 
   return service.findByIdAndDelete(request.params.id);
 };

@@ -1,8 +1,6 @@
-import { TaskRepository } from '../repositories';
-
 export default class TaskService {
-  constructor() {
-    this.taskRepository = new TaskRepository();
+  constructor(taskRepository) {
+    this.taskRepository = taskRepository;
   }
   async findOne(query) {
     return this.taskRepository.findOne(query);

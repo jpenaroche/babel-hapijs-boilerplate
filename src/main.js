@@ -1,12 +1,26 @@
 import { run } from './server';
 import { database } from './config';
-import { ErrorHandler, connect } from './lib';
+import { Container, ErrorHandler, connect } from './lib';
+import { TaskService } from './api/services';
+import { TaskRepository } from './api/repositories';
+import * as config from './config';
+
+const initContainer = () => {
+  const container = new Container();
+  container.singleton('Config', config);
+  container.singleton('TaskRepository', TaskRepository);
+  container.singleton('TaskService', TaskService, ['TaskRepository']);
+  return container;
+};
 
 const bootstrap = async () => {
   //Connecting to Atlas Cluster
   const db = connect(database);
+  const container = initContainer();
+  container.register('Db', db);
+
   return {
-    db,
+    container,
   };
 };
 
